@@ -23,33 +23,30 @@ export default function Header() {
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        {/* Solid background with subtle blur */}
-        <div className="absolute inset-0 bg-black/90 backdrop-blur-md border-b border-white/5" />
+        {/* Solid background */}
+        <div className="absolute inset-0 bg-black border-b border-white/10" />
         
         <nav className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <motion.a
+            <a
               href="#"
-              className="text-xl font-bold"
+              className="text-xl font-bold hover:opacity-80 transition-opacity"
               style={{ color: modeConfig.color }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               MAYKOL SALGADO
-            </motion.a>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {NAV_LINKS.map((link) => (
-                <motion.a
+                <a
                   key={link.href}
                   href={link.href}
                   className="text-sm text-white/70 hover:text-white transition-colors"
-                  whileHover={{ y: -2 }}
                 >
                   {link.label}
-                </motion.a>
+                </a>
               ))}
             </div>
 
@@ -108,7 +105,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-x-0 top-16 z-40 md:hidden"
           >
-            <div className="bg-black/90 backdrop-blur-xl border-b border-white/10 p-4">
+            <div className="bg-black border-b border-white/10 p-4">
               <div className="flex flex-col gap-4">
                 {NAV_LINKS.map((link) => (
                   <a

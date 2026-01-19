@@ -16,33 +16,24 @@ export default function Scene({ mode, className, children }: SceneProps) {
     <div className={className}>
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
-        dpr={[1, 2]}
+        dpr={1}
         gl={{
-          antialias: true,
+          antialias: false,
           alpha: true,
           powerPreference: "high-performance",
         }}
+        frameloop="demand"
       >
         <Suspense fallback={null}>
-          {/* Ambient light */}
-          <ambientLight intensity={0.4} />
+          {/* Simple lighting */}
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[5, 5, 5]} intensity={0.8} />
           
-          {/* Main directional light */}
-          <directionalLight
-            position={[10, 10, 5]}
-            intensity={1}
-            castShadow
-          />
-          
-          {/* Accent lights based on mode */}
+          {/* Single accent light */}
           <pointLight
-            position={[-10, -10, -10]}
-            intensity={0.5}
-            color={
-              mode === "dev" ? "#22D3EE" :
-              mode === "business" ? "#F59E0B" :
-              "#E11D48"
-            }
+            position={[-5, -5, -5]}
+            intensity={0.3}
+            color={mode === "dev" ? "#22D3EE" : "#F59E0B"}
           />
           
           {children}

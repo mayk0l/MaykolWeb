@@ -17,11 +17,11 @@ export default function EcosystemSection() {
       {/* Background */}
       <div className="absolute inset-0">
         <div
-          className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[128px] opacity-20"
+          className="absolute top-0 left-1/4 w-64 h-64 rounded-full blur-3xl opacity-10"
           style={{ backgroundColor: modeConfig.color }}
         />
         <div
-          className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-[128px] opacity-10"
+          className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full blur-3xl opacity-5"
           style={{ backgroundColor: modeConfig.color }}
         />
       </div>
@@ -66,7 +66,7 @@ export default function EcosystemSection() {
           ].map((category) => (
             <button
               key={category.id}
-              className="px-4 py-2 text-sm font-medium rounded-full border transition-all hover:scale-105"
+              className="px-4 py-2 text-sm font-medium rounded-full border transition-colors"
               style={{
                 borderColor: `${category.color}50`,
                 color: category.color,

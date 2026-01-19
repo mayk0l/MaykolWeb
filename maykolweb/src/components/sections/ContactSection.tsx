@@ -78,9 +78,9 @@ export default function ContactSection() {
     <section id="contact" className="relative py-32 bg-black">
       {/* Background */}
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-5"
         style={{
-          background: `radial-gradient(ellipse at center, ${modeConfig.color}, transparent 60%)`,
+          background: `radial-gradient(ellipse at center, ${modeConfig.color}, transparent 50%)`,
         }}
       />
 

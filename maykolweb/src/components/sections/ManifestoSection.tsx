@@ -12,9 +12,6 @@ export default function ManifestoSection() {
   });
   const { modeConfig } = useMode();
 
-  // Split text into words for animation
-  const words = MANIFESTO.text.split(" ");
-
   return (
     <section
       ref={ref}
@@ -55,37 +52,16 @@ export default function ManifestoSection() {
           &ldquo;
         </motion.div>
 
-        {/* Animated text */}
+        {/* Text - Simple fade in instead of word-by-word */}
         <div className="relative">
-          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 leading-relaxed font-light">
-            {words.map((word, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.3 + index * 0.03,
-                }}
-                className="inline-block mr-[0.3em]"
-              >
-                {/* Highlight key phrases */}
-                {word.includes("18") || word.includes("23") ? (
-                  <span style={{ color: modeConfig.color, fontWeight: 600 }}>
-                    {word}
-                  </span>
-                ) : word.includes("Venture") || word.includes("Architect") ? (
-                  <span style={{ color: modeConfig.color, fontWeight: 600 }}>
-                    {word}
-                  </span>
-                ) : word.includes("facturan") ? (
-                  <span className="text-white font-semibold">{word}</span>
-                ) : (
-                  word
-                )}
-              </motion.span>
-            ))}
-          </p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-xl sm:text-2xl md:text-3xl text-white/90 leading-relaxed font-light"
+          >
+            {MANIFESTO.text}
+          </motion.p>
         </div>
 
         {/* Signature */}

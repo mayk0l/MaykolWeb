@@ -20,7 +20,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Scene mode={mode} className="w-full h-full">
           <Prism mode={mode} />
-          <ParticleField mode={mode} count={150} />
+          <ParticleField mode={mode} count={80} />
         </Scene>
       </div>
 

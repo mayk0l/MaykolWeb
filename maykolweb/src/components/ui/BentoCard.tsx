@@ -24,27 +24,17 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
       className={`
         group relative overflow-hidden rounded-2xl border border-white/10
-        bg-gradient-to-br from-white/5 to-transparent
-        backdrop-blur-sm
-        hover:border-white/20 transition-all duration-300
+        bg-white/[0.02]
+        hover:border-white/20 transition-colors duration-300
         ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
         ${isMedium && !isLarge ? "md:col-span-1 md:row-span-1" : ""}
       `}
-      whileHover={{ scale: 1.02 }}
     >
-      {/* Glow effect */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, ${venture.color}, transparent 70%)`,
-        }}
-      />
-
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col">
         {/* Project Image Area */}
@@ -56,7 +46,8 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
             <img 
               src={venture.image} 
               alt={venture.name}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+              className="w-full h-full object-cover"
+              loading="lazy"
             />
           ) : (
             <div className="flex flex-col items-center gap-2">

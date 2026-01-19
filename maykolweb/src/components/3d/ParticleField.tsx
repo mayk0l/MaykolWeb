@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useMemo, useState } from "react";
 import * as THREE from "three";
 import type { Mode } from "@/types";
 import { MODES } from "@/lib/constants";
@@ -20,14 +19,12 @@ function seededRandom(seed: number): () => number {
 }
 
 export default function ParticleField({ count = 500, mode }: ParticleFieldProps) {
-  const pointsRef = useRef<THREE.Points>(null);
   // Use state to store the seed once on mount
   const [seed] = useState(() => 12345);
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
 
     const color = new THREE.Color(MODES[mode].color);
     const random = seededRandom(seed);
@@ -54,23 +51,14 @@ export default function ParticleField({ count = 500, mode }: ParticleFieldProps)
       colors[i * 3] = variedColor.r;
       colors[i * 3 + 1] = variedColor.g;
       colors[i * 3 + 2] = variedColor.b;
-
-      sizes[i] = random() * 2 + 0.5;
     }
 
-    return { positions, colors, sizes };
+    return { positions, colors };
   }, [count, mode, seed]);
 
-  useFrame((state) => {
-    if (!pointsRef.current) return;
-
-    // Slow rotation
-    pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-    pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.1;
-  });
-
+  // Static particles - no animation for performance
   return (
-    <points ref={pointsRef}>
+    <points rotation={[0.1, 0.2, 0]}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
@@ -80,18 +68,13 @@ export default function ParticleField({ count = 500, mode }: ParticleFieldProps)
           attach="attributes-color"
           args={[particles.colors, 3]}
         />
-        <bufferAttribute
-          attach="attributes-size"
-          args={[particles.sizes, 1]}
-        />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
+        size={0.03}
         vertexColors
         transparent
-        opacity={0.6}
+        opacity={0.4}
         sizeAttenuation
-        blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
     </points>
