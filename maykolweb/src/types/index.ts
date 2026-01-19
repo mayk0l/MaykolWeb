@@ -18,6 +18,7 @@ export interface Venture {
   role: string;
   description: string;
   category: "core" | "leadership" | "opensource";
+  image?: string; // Optional project image path
   metrics: {
     label: string;
     value: string;
