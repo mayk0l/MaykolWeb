@@ -2,27 +2,16 @@
 
 import { useMode } from "@/context/ModeProvider";
 import { NAV_LINKS } from "@/lib/constants";
-import { useScrollDirection, usePageScrollProgress } from "@/hooks/useScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import ModeSwitch from "@/components/ui/ModeSwitch";
 
 export default function Header() {
   const { modeConfig } = useMode();
-  const scrollDirection = useScrollDirection();
-  const scrollProgress = usePageScrollProgress();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const isHidden = scrollDirection === "down" && scrollProgress > 0.1;
 
   return (
     <>
-      <motion.header
-        initial={{ y: 0 }}
-        animate={{ y: isHidden ? -100 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 right-0 z-50"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50">
         {/* Solid background */}
         <div className="absolute inset-0 bg-black border-b border-white/10" />
         
@@ -85,43 +74,27 @@ export default function Header() {
             </div>
           </div>
         </nav>
-
-        {/* Scroll Progress Bar */}
-        <motion.div
-          className="absolute bottom-0 left-0 h-[2px]"
-          style={{
-            width: `${scrollProgress * 100}%`,
-            backgroundColor: modeConfig.color,
-          }}
-        />
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-16 z-40 md:hidden"
-          >
-            <div className="bg-black border-b border-white/10 p-4">
-              <div className="flex flex-col gap-4">
-                {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-lg text-white/70 hover:text-white transition-colors py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
+      {isMobileMenuOpen && (
+        <div className="fixed inset-x-0 top-16 z-40 md:hidden">
+          <div className="bg-black border-b border-white/10 p-4">
+            <div className="flex flex-col gap-4">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-lg text-white/70 hover:text-white transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </>
   );
 }
