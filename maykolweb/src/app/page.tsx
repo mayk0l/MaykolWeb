@@ -1,10 +1,11 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import FloatingCTA from "@/components/ui/FloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
-import ManifestoSection from "@/components/sections/ManifestoSection";
-import ProfileSection from "@/components/sections/ProfileSection";
+import SocialProofSection from "@/components/sections/SocialProofSection";
+import ServicesSection from "@/components/sections/ServicesSection";
 import EcosystemSection from "@/components/sections/EcosystemSection";
-import JourneySection from "@/components/sections/JourneySection";
+import ManifestoSection from "@/components/sections/ManifestoSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
@@ -13,26 +14,29 @@ export default function Home() {
       <Header />
       
       <main className="relative">
-        {/* Hero - The Prism */}
+        {/* Hero - Clear Value Proposition */}
         <HeroSection />
         
-        {/* Manifesto - The Builder's Logic */}
-        <ManifestoSection />
-
-        {/* Profile - Professional Photo & Bio */}
-        <ProfileSection />
+        {/* Social Proof - Build Trust */}
+        <SocialProofSection />
         
-        {/* Ecosystem - Bento Grid */}
+        {/* Services - What I Can Do */}
+        <ServicesSection />
+        
+        {/* Ecosystem/Portfolio - Proof of Work */}
         <EcosystemSection />
         
-        {/* Journey - Interactive Timeline */}
-        <JourneySection />
+        {/* Manifesto - Personal Connection */}
+        <ManifestoSection />
         
-        {/* Contact - The Filter */}
+        {/* Contact - The Conversion Point */}
         <ContactSection />
       </main>
       
       <Footer />
+      
+      {/* Mobile Floating CTA */}
+      <FloatingCTA />
     </>
   );
 }

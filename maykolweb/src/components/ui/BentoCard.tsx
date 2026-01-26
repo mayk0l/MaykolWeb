@@ -29,17 +29,17 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className={`
         group relative overflow-hidden rounded-2xl border border-white/10
-        bg-white/[0.02]
+        bg-white/[0.02] h-full
         hover:border-white/20 transition-colors duration-300
-        ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
-        ${isMedium && !isLarge ? "md:col-span-1 md:row-span-1" : ""}
+        ${isLarge ? "sm:col-span-2 sm:row-span-2" : ""}
+        ${isMedium && !isLarge ? "col-span-1 row-span-1" : ""}
       `}
     >
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col">
         {/* Project Image Area */}
         <div 
-          className="relative w-full h-44 bg-white/5 flex items-center justify-center overflow-hidden rounded-t-2xl"
+          className="relative w-full h-40 sm:h-44 bg-white/5 flex items-center justify-center overflow-hidden"
           style={{ borderBottom: `1px solid ${venture.color}30` }}
         >
           {venture.image ? (
@@ -61,9 +61,9 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
         </div>
 
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-4 sm:p-5 flex flex-col flex-grow">
           {/* Category Badge */}
-          <div className="mb-4">
+          <div className="mb-3">
             <span
               className="inline-block px-2 py-1 text-xs font-medium rounded-full"
               style={{
@@ -78,23 +78,23 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
           </div>
 
         {/* Title & Role */}
-        <h3 className="text-xl font-bold text-white mb-1">{venture.name}</h3>
-        <p className="text-sm text-white/60 mb-4">{venture.role}</p>
+        <h3 className="text-lg sm:text-xl font-bold text-white mb-1 line-clamp-1">{venture.name}</h3>
+        <p className="text-xs sm:text-sm text-white/60 mb-3">{venture.role}</p>
 
         {/* Description */}
-        <p className="text-sm text-white/70 leading-relaxed flex-grow">
+        <p className="text-xs sm:text-sm text-white/70 leading-relaxed flex-grow line-clamp-3">
           {venture.description}
         </p>
 
         {/* Metrics */}
-        <div className="mt-4 pt-4 border-t border-white/10">
+        <div className="mt-3 pt-3 border-t border-white/10">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs text-white/40 uppercase tracking-wider">
                 {venture.metrics.label}
               </p>
               <p
-                className="text-2xl font-bold"
+                className="text-xl sm:text-2xl font-bold"
                 style={{ color: venture.color }}
               >
                 {venture.metrics.value}
@@ -114,8 +114,8 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
         </div>
 
         {/* Technologies */}
-        <div className="mt-4 flex flex-wrap gap-2">
-          {venture.technologies.slice(0, 4).map((tech) => (
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {venture.technologies.slice(0, 3).map((tech) => (
             <Badge key={tech} text={tech} color={venture.color} />
           ))}
         </div>

@@ -268,9 +268,9 @@ export const MODES = {
 // ═══════════════════════════════════════════════════════════════════════════
 
 export const NAV_LINKS = [
-  { href: "#manifesto", label: "Manifiesto" },
-  { href: "#ecosystem", label: "Ecosistema" },
-  { href: "#journey", label: "Trayectoria" },
+  { href: "#servicios", label: "Servicios" },
+  { href: "#ecosystem", label: "Portfolio" },
+  { href: "#manifesto", label: "Sobre Mí" },
   { href: "#contact", label: "Contacto" },
 ] as const;
 

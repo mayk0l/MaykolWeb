@@ -20,49 +20,53 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Maykol Salgado | La Lógica del Constructor",
+  title: "Desarrollo de Software a Medida en Valparaíso | Maykol Salgado",
   description:
-    "Venture Architect de Limache, Chile. Líder Técnico en iTalenPRO, fundador de Volat y socio en SportPlay. Construyendo ecosistemas tecnológicos que facturan.",
+    "Desarrollo de software, apps web y automatización con IA para empresas de la Quinta Región. MVPs, sistemas a medida y consultoría técnica. Cotización gratis en 24h.",
   keywords: [
-    "Venture Architect",
-    "Líder Técnico",
-    "Software Factory",
-    "Next.js Developer",
-    "Chile",
-    "Tech Lead",
-    "Full Stack Developer",
-    "React",
-    "TypeScript",
+    "desarrollo de software valparaíso",
+    "programador quinta región",
+    "desarrollo web viña del mar",
+    "software a medida chile",
+    "automatización con inteligencia artificial",
+    "MVP startup chile",
+    "desarrollador freelance valparaíso",
+    "aplicaciones web empresas",
+    "consultoría tecnológica",
+    "Next.js React TypeScript",
   ],
-  authors: [{ name: "Maykol Nicolás Salgado Ramos" }],
+  authors: [{ name: "Maykol Salgado" }],
   creator: "Maykol Salgado",
   openGraph: {
     type: "website",
     locale: "es_CL",
     url: "https://maykolsalgado.me",
-    siteName: "Maykol Salgado - La Lógica del Constructor",
-    title: "Maykol Salgado | Venture Architect",
+    siteName: "Maykol Salgado - Desarrollo de Software",
+    title: "Desarrollo de Software a Medida | Quinta Región",
     description:
-      "Venture Architect. Construyendo ecosistemas tecnológicos que facturan.",
+      "Convierte tu idea en un producto que factura. Software a medida, MVPs y automatización con IA. Cotización gratis.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Maykol - The Builder's Logic",
+        alt: "Maykol Salgado - Desarrollo de Software en Valparaíso",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Maykol | The Builder's Logic",
+    title: "Desarrollo de Software | Maykol Salgado",
     description:
-      "Venture Architect. Construyendo infraestructuras que facturan.",
+      "Software a medida para empresas de la Quinta Región. Cotización gratis en 24h.",
     images: ["/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  alternates: {
+    canonical: "https://maykolsalgado.me",
   },
 };
 

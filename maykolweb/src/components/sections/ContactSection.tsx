@@ -1,81 +1,50 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useMode } from "@/context/ModeProvider";
-import {
-  BUDGET_OPTIONS,
-  PROJECT_PHASE_OPTIONS,
-  TECH_NEEDS_OPTIONS,
-} from "@/lib/constants";
-import { calculateLeadScore } from "@/lib/utils";
 import GlowButton from "@/components/ui/GlowButton";
-import type { ConsultingFormData, LeadScore } from "@/types";
+import { CheckCircle2, MessageCircle, Clock, Shield } from "lucide-react";
+
+const SERVICE_OPTIONS = [
+  { value: "mvp", label: "MVP / Startup" },
+  { value: "custom", label: "Software a medida" },
+  { value: "ai", label: "Automatización con IA" },
+  { value: "consulting", label: "Consultoría técnica" },
+  { value: "other", label: "Otro" },
+];
+
+const BENEFITS = [
+  { icon: Clock, text: "Respuesta en menos de 24 horas" },
+  { icon: Shield, text: "Sin compromiso, cotización gratis" },
+  { icon: MessageCircle, text: "Hablamos por WhatsApp si prefieres" },
+];
 
 export default function ContactSection() {
   const { modeConfig } = useMode();
-  const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [leadScore, setLeadScore] = useState<LeadScore | null>(null);
-
-  const [formData, setFormData] = useState<ConsultingFormData>({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
-    budget: "",
-    projectPhase: "",
-    techNeeds: [],
-    description: "",
+    whatsapp: "",
+    service: "",
+    message: "",
   });
-
-  const handleNext = () => {
-    if (step < 3) setStep(step + 1);
-  };
-
-  const handleBack = () => {
-    if (step > 1) setStep(step - 1);
-  };
-
-  const handleTechNeedToggle = (value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      techNeeds: prev.techNeeds.includes(value)
-        ? prev.techNeeds.filter((t) => t !== value)
-        : [...prev.techNeeds, value],
-    }));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Calculate lead score
-    const score = calculateLeadScore(
-      formData.budget,
-      formData.projectPhase,
-      formData.techNeeds,
-      BUDGET_OPTIONS,
-      PROJECT_PHASE_OPTIONS,
-      TECH_NEEDS_OPTIONS
-    );
-    setLeadScore(score);
-
-    // Simulate API call
+    
+    // Simular envío - aquí conectarías con Supabase
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
+    
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
 
-  const stepVariants = {
-    enter: { opacity: 0, x: 20 },
-    center: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 },
-  };
-
   return (
-    <section id="contact" className="relative py-32 bg-black">
+    <section id="contact" className="relative py-20 sm:py-24 bg-black">
       {/* Background */}
       <div
         className="absolute inset-0 opacity-5"
@@ -84,395 +53,201 @@ export default function ContactSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          
+          {/* Left: Value Proposition */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span
+              className="text-sm font-medium uppercase tracking-widest"
+              style={{ color: modeConfig.color }}
+            >
+              Contacto
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white leading-tight">
+              ¿Tienes un proyecto en mente?
+            </h2>
+            <p className="mt-4 text-lg text-white/60">
+              Cuéntame tu idea y te respondo con una propuesta clara, sin rodeos ni jerga técnica innecesaria.
+            </p>
+
+            {/* Benefits */}
+            <div className="mt-8 space-y-4">
+              {BENEFITS.map((benefit, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div 
+                    className="p-2 rounded-lg"
+                    style={{ backgroundColor: `${modeConfig.color}15` }}
+                  >
+                    <benefit.icon className="w-5 h-5" style={{ color: modeConfig.color }} />
+                  </div>
+                  <span className="text-white/70">{benefit.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Direct contact */}
+            <div className="mt-10 p-6 bg-white/5 rounded-xl border border-white/10">
+              <p className="text-white/60 text-sm mb-3">
+                ¿Prefieres hablar directamente?
+              </p>
+              <a 
+                href="mailto:maykol.salgado@proton.me"
+                className="text-white font-medium hover:underline"
+                style={{ textDecorationColor: modeConfig.color }}
+              >
+                maykol.salgado@proton.me
+              </a>
+              <p className="text-white/40 text-sm mt-2">
+                O escríbeme por LinkedIn para una respuesta más rápida
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right: Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8"
+          >
+            {isSubmitted ? (
+              <div className="text-center py-8">
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                  style={{ backgroundColor: `${modeConfig.color}20` }}
+                >
+                  <CheckCircle2 className="w-8 h-8" style={{ color: modeConfig.color }} />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  ¡Mensaje enviado!
+                </h3>
+                <p className="text-white/60">
+                  Te contactaré en las próximas 24 horas. <br />
+                  Revisa tu email (y spam, por si acaso).
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label className="block text-sm text-white/60 mb-2">
+                    Nombre *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                    placeholder="Tu nombre"
+                  />
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-white/60 mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                      placeholder="tu@email.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-white/60 mb-2">
+                      WhatsApp (opcional)
+                    </label>
+                    <input
+                      type="tel"
+                      value={formData.whatsapp}
+                      onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                      placeholder="+56 9 1234 5678"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm text-white/60 mb-2">
+                    ¿Qué necesitas? *
+                  </label>
+                  <select
+                    required
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors appearance-none cursor-pointer"
+                  >
+                    <option value="" className="bg-black">Selecciona una opción</option>
+                    {SERVICE_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value} className="bg-black">
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm text-white/60 mb-2">
+                    Cuéntame tu idea *
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors resize-none"
+                    placeholder="Describe brevemente tu proyecto o idea. ¿Qué problema quieres resolver?"
+                  />
+                </div>
+
+                <GlowButton 
+                  onClick={() => {}} 
+                  className="w-full justify-center"
+                  size="lg"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      Enviando...
+                    </>
+                  ) : (
+                    "Solicitar Cotización Gratis"
+                  )}
+                </GlowButton>
+
+                <p className="text-center text-xs text-white/40">
+                  Sin spam. Sin compromiso. Solo una propuesta clara.
+                </p>
+              </form>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Urgency */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-16 text-center p-6 rounded-xl border border-dashed"
+          style={{ borderColor: `${modeConfig.color}40` }}
         >
-          <span
-            className="text-sm font-medium uppercase tracking-widest"
-            style={{ color: modeConfig.color }}
-          >
-            Contacto
-          </span>
-          <h2 className="mt-4 text-4xl sm:text-5xl font-bold text-white">
-            ¿Listo para construir?
-          </h2>
-          <p className="mt-4 text-lg text-white/60 max-w-xl mx-auto">
-            Este formulario me ayuda a entender tu proyecto y asegurar que puedo
-            aportar valor real. Solo trabajo en proyectos donde el fit es perfecto.
+          <p className="text-white/60">
+            ⚡ <span className="text-white font-medium">Cupos limitados:</span> Solo trabajo con 3 clientes nuevos por mes para garantizar dedicación total a cada proyecto.
           </p>
-        </motion.div>
-
-        {/* Progress indicator */}
-        {!isSubmitted && (
-          <div className="flex justify-center mb-8">
-            <div className="flex items-center gap-2">
-              {[1, 2, 3].map((s) => (
-                <div key={s} className="flex items-center">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
-                      s === step
-                        ? "scale-110"
-                        : s < step
-                        ? "opacity-100"
-                        : "opacity-40"
-                    }`}
-                    style={{
-                      backgroundColor: s <= step ? modeConfig.color : "rgba(255,255,255,0.1)",
-                      color: s <= step ? "#000" : "rgba(255,255,255,0.5)",
-                    }}
-                  >
-                    {s < step ? "✓" : s}
-                  </div>
-                  {s < 3 && (
-                    <div
-                      className="w-12 h-0.5 mx-2"
-                      style={{
-                        backgroundColor: s < step ? modeConfig.color : "rgba(255,255,255,0.1)",
-                      }}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/5 border border-white/10 rounded-2xl p-8"
-        >
-          {isSubmitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-12"
-            >
-              <div
-                className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                style={{ backgroundColor: `${modeConfig.color}20` }}
-              >
-                <svg
-                  className="w-10 h-10"
-                  style={{ color: modeConfig.color }}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                ¡Mensaje recibido!
-              </h3>
-              <p className="text-white/60 mb-4">
-                Tu lead score es:{" "}
-                <span
-                  className="font-bold"
-                  style={{ color: modeConfig.color }}
-                >
-                  {leadScore?.tier.toUpperCase()}
-                </span>
-              </p>
-              <p className="text-white/60">
-                Te contactaré dentro de las próximas 24-48 horas hábiles.
-              </p>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <AnimatePresence mode="wait">
-                {step === 1 && (
-                  <motion.div
-                    key="step1"
-                    variants={stepVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="space-y-6"
-                  >
-                    <h3 className="text-xl font-semibold text-white mb-6">
-                      Cuéntame sobre ti
-                    </h3>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-2">
-                        Nombre *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30"
-                        placeholder="Tu nombre"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30"
-                        placeholder="tu@email.com"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-2">
-                        Empresa (opcional)
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.company}
-                        onChange={(e) =>
-                          setFormData({ ...formData, company: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30"
-                        placeholder="Tu empresa"
-                      />
-                    </div>
-                  </motion.div>
-                )}
-
-                {step === 2 && (
-                  <motion.div
-                    key="step2"
-                    variants={stepVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="space-y-6"
-                  >
-                    <h3 className="text-xl font-semibold text-white mb-6">
-                      Sobre el proyecto
-                    </h3>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-3">
-                        Presupuesto estimado *
-                      </label>
-                      <div className="space-y-2">
-                        {BUDGET_OPTIONS.map((option) => (
-                          <label
-                            key={option.value}
-                            className={`flex items-center p-4 rounded-lg border cursor-pointer transition-all ${
-                              formData.budget === option.value
-                                ? "border-opacity-100"
-                                : "border-white/10 hover:border-white/20"
-                            }`}
-                            style={{
-                              borderColor:
-                                formData.budget === option.value
-                                  ? modeConfig.color
-                                  : undefined,
-                              backgroundColor:
-                                formData.budget === option.value
-                                  ? `${modeConfig.color}10`
-                                  : undefined,
-                            }}
-                          >
-                            <input
-                              type="radio"
-                              name="budget"
-                              value={option.value}
-                              checked={formData.budget === option.value}
-                              onChange={(e) =>
-                                setFormData({ ...formData, budget: e.target.value })
-                              }
-                              className="sr-only"
-                            />
-                            <span className="text-white">{option.label}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-3">
-                        Fase del proyecto *
-                      </label>
-                      <div className="space-y-2">
-                        {PROJECT_PHASE_OPTIONS.map((option) => (
-                          <label
-                            key={option.value}
-                            className={`flex items-center p-4 rounded-lg border cursor-pointer transition-all ${
-                              formData.projectPhase === option.value
-                                ? "border-opacity-100"
-                                : "border-white/10 hover:border-white/20"
-                            }`}
-                            style={{
-                              borderColor:
-                                formData.projectPhase === option.value
-                                  ? modeConfig.color
-                                  : undefined,
-                              backgroundColor:
-                                formData.projectPhase === option.value
-                                  ? `${modeConfig.color}10`
-                                  : undefined,
-                            }}
-                          >
-                            <input
-                              type="radio"
-                              name="projectPhase"
-                              value={option.value}
-                              checked={formData.projectPhase === option.value}
-                              onChange={(e) =>
-                                setFormData({
-                                  ...formData,
-                                  projectPhase: e.target.value,
-                                })
-                              }
-                              className="sr-only"
-                            />
-                            <span className="text-white">{option.label}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {step === 3 && (
-                  <motion.div
-                    key="step3"
-                    variants={stepVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="space-y-6"
-                  >
-                    <h3 className="text-xl font-semibold text-white mb-6">
-                      Necesidades técnicas
-                    </h3>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-3">
-                        ¿Qué necesitas? (selección múltiple)
-                      </label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {TECH_NEEDS_OPTIONS.map((option) => (
-                          <label
-                            key={option.value}
-                            className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all ${
-                              formData.techNeeds.includes(option.value)
-                                ? "border-opacity-100"
-                                : "border-white/10 hover:border-white/20"
-                            }`}
-                            style={{
-                              borderColor: formData.techNeeds.includes(option.value)
-                                ? modeConfig.color
-                                : undefined,
-                              backgroundColor: formData.techNeeds.includes(
-                                option.value
-                              )
-                                ? `${modeConfig.color}10`
-                                : undefined,
-                            }}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={formData.techNeeds.includes(option.value)}
-                              onChange={() => handleTechNeedToggle(option.value)}
-                              className="sr-only"
-                            />
-                            <span className="text-sm text-white">{option.label}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm text-white/60 mb-2">
-                        Cuéntame más sobre tu proyecto
-                      </label>
-                      <textarea
-                        rows={4}
-                        value={formData.description}
-                        onChange={(e) =>
-                          setFormData({ ...formData, description: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30 resize-none"
-                        placeholder="Describe brevemente tu proyecto, objetivos y timeline..."
-                      />
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Navigation */}
-              <div className="flex justify-between mt-8 pt-6 border-t border-white/10">
-                {step > 1 ? (
-                  <button
-                    type="button"
-                    onClick={handleBack}
-                    className="px-6 py-3 text-white/60 hover:text-white transition-colors"
-                  >
-                    ← Atrás
-                  </button>
-                ) : (
-                  <div />
-                )}
-
-                {step < 3 ? (
-                  <GlowButton onClick={handleNext}>
-                    Siguiente →
-                  </GlowButton>
-                ) : (
-                  <GlowButton onClick={() => {}}>
-                    {isSubmitting ? (
-                      <>
-                        <svg
-                          className="animate-spin w-5 h-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                          />
-                        </svg>
-                        Enviando...
-                      </>
-                    ) : (
-                      "Enviar consulta"
-                    )}
-                  </GlowButton>
-                )}
-              </div>
-            </form>
-          )}
         </motion.div>
       </div>
     </section>
