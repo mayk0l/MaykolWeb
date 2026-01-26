@@ -342,6 +342,110 @@ export default function SocialProofSection() {
               </div>
             </div>
           </div>
+
+          {/* Screenshots - Resultados Reales */}
+          <div className="mt-8">
+            <p className="text-center text-white/40 text-sm mb-6">
+              📱 Proyectos con presencia en redes sociales
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {/* DatoQuinta Instagram */}
+              <div className="relative bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                <div className="absolute top-4 left-4 z-10">
+                  <div 
+                    className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+                    style={{ 
+                      backgroundColor: `${modeConfig.color}90`,
+                      color: '#fff'
+                    }}
+                  >
+                    📰 DatoQuinta
+                  </div>
+                </div>
+                <img 
+                  src="/datoquintass.jpeg" 
+                  alt="DatoQuinta - Instagram con 43K+ seguidores"
+                  className="w-full h-auto"
+                />
+                <div className="p-4 border-t border-white/10">
+                  <h4 className="text-white font-medium">DatoQuinta</h4>
+                  <p className="text-white/50 text-sm">43K+ seguidores</p>
+                </div>
+              </div>
+
+              {/* Panorama Landing */}
+              <div className="relative bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                <div className="absolute top-4 left-4 z-10">
+                  <div 
+                    className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+                    style={{ 
+                      backgroundColor: `${modeConfig.color}90`,
+                      color: '#fff'
+                    }}
+                  >
+                    🏔️ Panorama
+                  </div>
+                </div>
+                <img 
+                  src="/panoramalanding.png" 
+                  alt="Panorama - Landing page de turismo"
+                  className="w-full h-auto"
+                />
+                <div className="p-4 border-t border-white/10">
+                  <h4 className="text-white font-medium">Panorama</h4>
+                  <p className="text-white/50 text-sm">Startup de turismo</p>
+                </div>
+              </div>
+
+              {/* BoilerApp */}
+              <div className="relative bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                <div className="absolute top-4 left-4 z-10">
+                  <div 
+                    className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+                    style={{ 
+                      backgroundColor: `${modeConfig.color}90`,
+                      color: '#fff'
+                    }}
+                  >
+                    🔥 BoilerApp
+                  </div>
+                </div>
+                <img 
+                  src="/boilerapp.png" 
+                  alt="BoilerApp - Aplicación de gestión"
+                  className="w-full h-auto"
+                />
+                <div className="p-4 border-t border-white/10">
+                  <h4 className="text-white font-medium">BoilerApp</h4>
+                  <p className="text-white/50 text-sm">App de gestión</p>
+                </div>
+              </div>
+
+              {/* ComprasxMayor Instagram */}
+              <div className="relative bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                <div className="absolute top-4 left-4 z-10">
+                  <div 
+                    className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+                    style={{ 
+                      backgroundColor: `${modeConfig.color}90`,
+                      color: '#fff'
+                    }}
+                  >
+                    🛒 ComprasxMayor
+                  </div>
+                </div>
+                <img 
+                  src="/comprasxmayor.jpeg" 
+                  alt="ComprasxMayor - Instagram"
+                  className="w-full h-auto"
+                />
+                <div className="p-4 border-t border-white/10">
+                  <h4 className="text-white font-medium">ComprasxMayor</h4>
+                  <p className="text-white/50 text-sm">Compras mayoristas</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Open Source Showcase */}
@@ -429,6 +533,20 @@ export default function SocialProofSection() {
                 />
                 <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded-lg text-xs text-white/80">
                   💬 Feedback de la comunidad
+                </div>
+              </div>
+            </div>
+            
+            {/* Product Screenshot */}
+            <div className="p-4 pt-0">
+              <div className="relative rounded-xl overflow-hidden border border-white/10">
+                <img 
+                  src="/VolatCajaPyme.png" 
+                  alt="RetailOS - Sistema POS en funcionamiento"
+                  className="w-full h-auto"
+                />
+                <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded-lg text-xs text-white/80">
+                  🖥️ Sistema POS en producción
                 </div>
               </div>
             </div>
