@@ -433,20 +433,6 @@ export default function SocialProofSection() {
               </div>
             </div>
             
-            {/* Product Screenshot */}
-            <div className="p-4 pt-0">
-              <div className="relative rounded-xl overflow-hidden border border-white/10">
-                <img 
-                  src="/VolatCajaPyme.png" 
-                  alt="RetailOS - Sistema POS en funcionamiento"
-                  className="w-full h-auto"
-                />
-                <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded-lg text-xs text-white/80">
-                  🖥️ Sistema POS en producción
-                </div>
-              </div>
-            </div>
-            
             {/* Community Quote */}
             <div className="p-4 border-t border-white/10 bg-white/[0.02]">
               <div className="flex items-start gap-3">

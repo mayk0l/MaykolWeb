@@ -100,13 +100,13 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
         {/* Project Image Area - Moved to bottom */}
         {venture.image && (
           <div 
-            className="relative w-full bg-white/5 overflow-hidden mt-auto"
+            className="relative w-full overflow-hidden mt-auto"
             style={{ borderTop: `1px solid ${venture.color}30` }}
           >
             <img 
               src={venture.image} 
               alt={venture.name}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto"
               loading="lazy"
             />
           </div>
