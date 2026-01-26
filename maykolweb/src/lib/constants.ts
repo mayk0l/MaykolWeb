@@ -27,21 +27,6 @@ export const MANIFESTO = {
 
 export const CORE_VENTURES = [
   {
-    id: "volat",
-    name: "Volat / CajaPyme 2.0",
-    role: "Fundador y Arquitecto",
-    description: "SaaS POS con foco en el mercado chileno. Transición de producto propio a Software Factory de élite.",
-    category: "core",
-    metrics: {
-      label: "Software Factory",
-      value: "Elite",
-    },
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Supabase"],
-    color: "#10B981", // Emerald
-    link: null,
-    image: "/VolatCajaPyme.png",
-  },
-  {
     id: "datoquinta",
     name: "DatoQuinta.cl",
     role: "Socio Administrador y Lead Dev",
@@ -70,6 +55,21 @@ export const CORE_VENTURES = [
     color: "#EC4899", // Pink
     link: null,
     image: "/comprasxmayorss.jpeg",
+  },
+  {
+    id: "volat",
+    name: "Volat / CajaPyme 2.0",
+    role: "Fundador y Arquitecto",
+    description: "SaaS POS con foco en el mercado chileno. Transición de producto propio a Software Factory de élite.",
+    category: "core",
+    metrics: {
+      label: "Software Factory",
+      value: "Elite",
+    },
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Supabase"],
+    color: "#10B981", // Emerald
+    link: null,
+    image: "/VolatCajaPyme.png",
   },
 ] as const;
 

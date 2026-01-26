@@ -17,8 +17,9 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
     triggerOnce: true,
   });
 
-  // Determine card size based on category and index
-  const isLarge = venture.category === "core" && index === 0;
+  // Volat gets full width (col-span-2)
+  const isVolat = venture.id === "volat";
+  // Other core ventures are medium size
   const isMedium = venture.category === "core" || venture.category === "opensource";
 
   return (
@@ -31,8 +32,8 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
         group relative overflow-hidden rounded-2xl border border-white/10
         bg-white/[0.02] h-full
         hover:border-white/20 transition-colors duration-300
-        ${isLarge ? "sm:col-span-2 sm:row-span-2" : ""}
-        ${isMedium && !isLarge ? "col-span-1 row-span-1" : ""}
+        ${isVolat ? "sm:col-span-2" : ""}
+        ${isMedium && !isVolat ? "col-span-1 row-span-1" : ""}
       `}
     >
       {/* Content */}
@@ -98,7 +99,7 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
         </div>
 
         {/* Project Image Area - Moved to bottom */}
-        {venture.image && (
+        {venture.image ? (
           <div 
             className="relative w-full overflow-hidden mt-auto"
             style={{ borderTop: `1px solid ${venture.color}30` }}
@@ -106,9 +107,19 @@ export default function BentoCard({ venture, index }: Omit<BentoCardProps, 'mode
             <img 
               src={venture.image} 
               alt={venture.name}
-              className="w-full h-auto"
+              className={`w-full ${venture.id === 'volat' ? 'h-auto max-h-64 object-contain object-left' : 'h-48 object-cover object-top'}`}
               loading="lazy"
             />
+          </div>
+        ) : (
+          <div 
+            className="relative w-full overflow-hidden mt-auto p-4 flex items-center justify-center gap-2"
+            style={{ borderTop: `1px solid ${venture.color}30`, backgroundColor: `${venture.color}05` }}
+          >
+            <svg className="w-4 h-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span className="text-xs text-white/30 font-medium">Proyecto privado</span>
           </div>
         )}
 
