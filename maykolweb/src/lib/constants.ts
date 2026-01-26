@@ -69,7 +69,7 @@ export const CORE_VENTURES = [
     technologies: ["E-commerce", "Logistics", "Inventory"],
     color: "#EC4899", // Pink
     link: null,
-    image: "/comprasxmayor.jpeg",
+    image: "/comprasxmayorss.jpeg",
   },
 ] as const;
 
