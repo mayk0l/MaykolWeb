@@ -24,7 +24,7 @@ const TESTIMONIALS = [
     role: "Plataforma de IA empresarial",
     content: "Arquitectura RAG y sistemas de IA para empresas. El conocimiento técnico de Maykol en inteligencia artificial es de primer nivel.",
     metric: "Especialista IA",
-    image: null,
+    image: "/italenpro.png",
   },
 ];
 
