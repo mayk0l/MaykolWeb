@@ -143,13 +143,13 @@ export default function SocialProofSection() {
                 </div>
                 
                 {/* Content */}
-                <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                <p className="text-white/70 text-sm mb-4 leading-relaxed flex-1">
                   &ldquo;{testimonial.content}&rdquo;
                 </p>
                 
                 {/* Metric highlight */}
                 <div 
-                  className="inline-block px-3 py-1 rounded-full text-xs font-medium mb-4"
+                  className="inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 self-start"
                   style={{ 
                     backgroundColor: `${modeConfig.color}15`,
                     color: modeConfig.color
