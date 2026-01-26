@@ -39,6 +39,7 @@ export const CORE_VENTURES = [
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Supabase"],
     color: "#10B981", // Emerald
     link: null,
+    image: "/VolatCajaPyme.png",
   },
   {
     id: "datoquinta",
@@ -53,6 +54,7 @@ export const CORE_VENTURES = [
     technologies: ["Python", "LLMs", "Scraping", "Automation"],
     color: "#F59E0B", // Amber
     link: "https://datoquinta.cl",
+    image: "/datoquintass.jpeg",
   },
   {
     id: "mayorista-textil",
@@ -67,6 +69,7 @@ export const CORE_VENTURES = [
     technologies: ["E-commerce", "Logistics", "Inventory"],
     color: "#EC4899", // Pink
     link: null,
+    image: "/comprasxmayor.jpeg",
   },
 ] as const;
 
@@ -88,6 +91,7 @@ export const ENGINEERING_LEADERSHIP = [
     technologies: ["NestJS", "React", "PostgreSQL", "AWS"],
     color: "#3B82F6", // Blue
     link: null,
+    image: "/panoramalanding.png",
   },
   {
     id: "boilerapp",
@@ -102,6 +106,7 @@ export const ENGINEERING_LEADERSHIP = [
     technologies: ["React", "NestJS", "PostgreSQL", "Real-time"],
     color: "#8B5CF6", // Violet
     link: null,
+    image: "/boilerapp.png",
   },
   {
     id: "italenpro",
