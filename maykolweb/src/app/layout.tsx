@@ -47,7 +47,7 @@ export const metadata: Metadata = {
       "Convierte tu idea en un producto que factura. Software a medida, MVPs y automatización con IA. Cotización gratis.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/banner.png",
         width: 1200,
         height: 630,
         alt: "Maykol Salgado - Desarrollo de Software en Valparaíso",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "Desarrollo de Software | Maykol Salgado",
     description:
       "Software a medida para empresas de la Quinta Región. Cotización gratis en 24h.",
-    images: ["/og-image.png"],
+    images: ["/banner.png"],
   },
   robots: {
     index: true,
